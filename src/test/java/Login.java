@@ -1,4 +1,6 @@
 import common.BasePage;
+import common.BaseTest;
+import org.testng.annotations.Parameters;
 import pageobject.HomePageObject;
 import  pageobject.LoginPageObject;
 import  pageobject.RegisterPageObject;
@@ -12,7 +14,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.Random;
-public class Login {
+public class Login extends BaseTest {
     WebDriver driver;
     String firstName, lastName, validEmail, invalidEmail, notFoundEmail, password;
     BasePage basePage;
@@ -20,10 +22,11 @@ public class Login {
     RegisterPageObject registerPage;
     LoginPageObject loginPage;
 
-
+@Parameters("browser")
     @BeforeClass
-    public void beforeClass() {
-        driver = new ChromeDriver();
+    public void beforeClass(String browserName) {
+    driver= getDriverBrowser(browserName);
+        //driver = new ChromeDriver();
         //driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

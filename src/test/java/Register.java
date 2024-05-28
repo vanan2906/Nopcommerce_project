@@ -1,6 +1,7 @@
 
 
 import common.BasePage;
+import common.BaseTest;
 import pageobject.HomePageObject;
 import  pageobject.LoginPageObject;
 import  pageobject.RegisterPageObject;
@@ -14,7 +15,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.Random;
-public class Register {
+public class Register extends BaseTest {
     WebDriver driver;
     String firstName, lastName, emailAddress, password;
     BasePage basePage;
