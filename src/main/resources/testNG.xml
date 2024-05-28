@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite parallel="none" name="NopCommerce - Web Automation UI">
+    <!--    <listeners>-->
+    <!--        <listener class-name="reportConfig.MethodListener"/>-->
+    <!--        <listener class-name="reportConfig.ExtentTestListener"/>-->
+    <!--    </listeners>-->
+
+    <parameter name="url" value="https://demo.nopcommerce.com/login?"/>
+    <test name="Run on Chrome" preserve-order="true" >
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="test.Registerfeature">
+            </class>
+        </classes>
+    </test>
+</suite>
