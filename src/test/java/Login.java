@@ -14,7 +14,7 @@ import java.time.Duration;
 import java.util.Random;
 public class Login {
     WebDriver driver;
-    String firstName, lastName, emailAddress, password;
+    String firstName, lastName, validEmail, invalidEmail, notFoundEmail, password;
     BasePage basePage;
     HomePageObject homePage;
     RegisterPageObject registerPage;
@@ -23,28 +23,45 @@ public class Login {
 
     @BeforeClass
     public void beforeClass() {
-        //Khởi tạo browser với Chrome
         driver = new ChromeDriver();
         //driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         firstName = "Fc";
         lastName = "Xom Le";
-        emailAddress = "abc" + generateFakeNumber() + "@gmail.com";
+        validEmail = "abc" + generateFakeNumber() + "@gmail.com";
+        invalidEmail= "invalid@gmail";
+        notFoundEmail = "notfound" + generateFakeNumber() + "@gmail.com";
         password = "1234567";
         basePage = new BasePage();
         driver.get("https://demo.nopcommerce.com/");
         homePage = new HomePageObject(driver);
         registerPage = new RegisterPageObject(driver);
         loginPage = new LoginPageObject(driver);
+
+
+//        Pre-condition
+        homePage.clickToRegisterLink();
+        registerPage.inputToFirstnameTextbox(firstName);
+        registerPage.inputToLastnameTextbox(lastName);
+        registerPage.selectDateOfBirthday("1","January","1914");
+
+        registerPage.inputToEmailTextbox(validEmail);
+        registerPage.inputToPasswordTextbox(password);
+        registerPage.inputToConfirmpasswordTextbox(password);
+
+        registerPage.clickToRegisterButton();
+        homePage.clicktoLogOut();
+        
+//        Logout -> CLick Loginin
+
+
     }
 
     @Test
     public void Login_01_Empty_Data() {
         homePage.clickToLoginLink();
-
         loginPage.clickToLoginButton();
-
         Assert.assertEquals(loginPage.getErrorMessageAtEmailMessage(), "Please enter your email");
 
     }
@@ -52,9 +69,8 @@ public class Login {
     @Test
     public void Login_02_Invalid_Email() {
         homePage.clickToLoginLink();
-        loginPage.inputToEmailTextbox("afefef@a3re");
+        loginPage.inputToEmailTextbox(invalidEmail);
         loginPage.clickToLoginButton();
-
         Assert.assertEquals(loginPage.getErrorMessageAtEmailMessage(), "Wrong email");
 
 
@@ -64,7 +80,7 @@ public class Login {
     public void Login_03_Email_Not_Login_Yet() {
 
         homePage.clickToLoginLink();
-        loginPage.inputToEmailTextbox(emailAddress);
+        loginPage.inputToEmailTextbox(notFoundEmail);
         loginPage.inputToPasswordTextbox(password);
 
         loginPage.clickToLoginButton();
@@ -77,24 +93,9 @@ public class Login {
 
     @Test
     public void Login_04_Existed_Email_But_Empty_Password() {
-        homePage.clickToRegisterLink();
-        // registerPage.clickToGenderRadioButton();
-        registerPage.inputToFirstnameTextbox(firstName);
-        registerPage.inputToLastnameTextbox(lastName);
-        registerPage.selectDateOfBirthday("1","January","1914");
-
-        registerPage.inputToEmailTextbox(emailAddress);
-        registerPage.inputToPasswordTextbox(password);
-        registerPage.inputToConfirmpasswordTextbox(password);
-
-        registerPage.clickToRegisterButton();
-        //Assert.assertEquals(registerPage.getRegisterSuccessMessage(), "Your registration completed");
-        //registerPage.clickToLogoutLink();
-        // //a[@class='ico-logout']
-        registerPage.clickToLogoutLink();
         homePage.clickToLoginLink();
 
-        loginPage.inputToEmailTextbox(emailAddress);
+        loginPage.inputToEmailTextbox(validEmail);
 
         loginPage.clickToLoginButton();
 
@@ -107,7 +108,7 @@ public class Login {
         homePage.clickToRegisterLink();
         registerPage.inputToFirstnameTextbox(firstName);
         registerPage.inputToLastnameTextbox(lastName);
-        registerPage.inputToEmailTextbox(emailAddress);
+        registerPage.inputToEmailTextbox(validEmail);
         registerPage.inputToPasswordTextbox(password);
         registerPage.inputToConfirmpasswordTextbox(password);
 
@@ -119,7 +120,7 @@ public class Login {
         //registerPage.clickToLogoutLink();
         homePage.clickToLoginLink();
 
-        loginPage.inputToEmailTextbox(emailAddress);
+        loginPage.inputToEmailTextbox(validEmail);
         loginPage.inputToPasswordTextbox("AAAAAAAAAA");
         loginPage.clickToLoginButton();
 
@@ -130,7 +131,7 @@ public class Login {
     @Test
     public void Login_06_Success() {
         homePage.clickToLoginLink();
-        loginPage.inputToEmailTextbox(emailAddress);
+        loginPage.inputToEmailTextbox(validEmail);
         loginPage.inputToPasswordTextbox(password);
         loginPage.clickToLoginButton();
 

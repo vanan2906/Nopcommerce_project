@@ -29,6 +29,11 @@ public class HomePageObject extends BasePage {
         waitForElementClickable(driver,HomePageUI.LOGIN_SUCCESS_TEXT);
         return isElementDisplayed(driver,HomePageUI.LOGIN_SUCCESS_TEXT);
     }
+
+    public void clicktoLogOut() {
+        waitForElementClickable(driver,HomePageUI.LOGOUT_LINK);
+        clickToElement(driver,HomePageUI.LOGOUT_LINK);
+    }
     //Viết ra hàm mã giả tương ứng bám với flow của TCs
     // Tạo ra các action tương ứng theo page
     // Homepage:

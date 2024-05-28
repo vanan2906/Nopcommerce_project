@@ -10,7 +10,7 @@
     <test name="Run on Chrome" preserve-order="true" >
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="test.Registerfeature">
+            <class name="Login">
             </class>
         </classes>
     </test>
