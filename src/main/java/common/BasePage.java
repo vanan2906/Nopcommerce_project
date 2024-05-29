@@ -335,6 +335,22 @@ public class BasePage {
         WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
         explicitWait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpathLocator)));
     }
+    public void openAddressPage(WebDriver driver, String xpathLocator) {
+        waitForElementClickable(driver, BasePageUI.ADDRESS_LINK);
+        clickToElement(driver, BasePageUI.ADDRESS_LINK);
+    }
+    public void openMyProductReviewPage(WebDriver driver, String xpathLocator) {
+        waitForElementClickable(driver, BasePageUI.MY_PRODUCT_REVIEW_LINK);
+        clickToElement(driver, BasePageUI.MY_PRODUCT_REVIEW_LINK);
+    }
+    public void openRewardPointPage(WebDriver driver, String xpathLocator) {
+        waitForElementClickable(driver, BasePageUI.MY_REWARD_POINTS_LINK);
+        clickToElement(driver, BasePageUI.MY_REWARD_POINTS_LINK);
+    }
+    public void openCustomerInforPage(WebDriver driver, String xpathLocator) {
+        waitForElementClickable(driver, BasePageUI.CUSTOMER_INFOR_LINK);
+        clickToElement(driver, BasePageUI.CUSTOMER_INFOR_LINK);
+    }
 
 
 

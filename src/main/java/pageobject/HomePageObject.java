@@ -23,6 +23,7 @@ public class HomePageObject extends BasePage {
         waitForElementClickable(driver, HomePageUI.LOGIN_LINK);
         clickToElement(driver,HomePageUI.LOGIN_LINK);
 
+
     }
 
     public boolean isMyAccountIsDisplayed() {

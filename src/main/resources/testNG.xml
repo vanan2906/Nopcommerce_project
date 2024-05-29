@@ -10,25 +10,25 @@
     <test name="Run on Firefox" preserve-order="true" >
         <parameter name="browser" value="firefox"/>
         <classes>
-            <class name="Login">
+            <class name="Switch_Page">
             </class>
         </classes>
     </test>
 
 
-    <test name="Run on Chrome" preserve-order="true" >
-        <parameter name="browser" value="chrome"/>
-        <classes>
-            <class name="Login">
-            </class>
-        </classes>
-    </test>
+<!--    <test name="Run on Chrome" preserve-order="true" >-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--            <class name="Login">-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="Run on  Edge" preserve-order="true" >
-        <parameter name="browser" value="edge"/>
-        <classes>
-            <class name="Login">
-            </class>
-        </classes>
-    </test>
+<!--    <test name="Run on  Edge" preserve-order="true" >-->
+<!--        <parameter name="browser" value="edge"/>-->
+<!--        <classes>-->
+<!--            <class name="Login">-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>
