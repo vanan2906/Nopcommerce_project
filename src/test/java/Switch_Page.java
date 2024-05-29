@@ -42,6 +42,11 @@ public class Switch_Page extends BaseTest {
         homePage = new HomePageObject(driver);
         registerPage = new RegisterPageObject(driver);
         loginPage = new LoginPageObject(driver);
+        addressPage = new AddressPageObject(driver);
+        customerInforPage = new CustomerInforPageObject(driver);
+        myProductReviewPage = new MyProductReviewPageObject(driver);
+        rewardPointPage = new RewardPointReviewPageObject(driver);
+
 
 
     }
@@ -74,15 +79,17 @@ public class Switch_Page extends BaseTest {
 
     @Test
     public void User_03_Myaccount() {
-        customerInforPage.openAddressPage();
-        addressPage.openMyProductReviewPage();
-        myProductReviewPage.openRewardPointPage();
-        rewardPointPage.openAddressPage();
-        addressPage.openRewardPointPage();
-        rewardPointPage.openMyProductReviewPage();
-        myProductReviewPage.openAddressPage();
-        addressPage.openCustomerInforPage();
-        customerInforPage.openMyProductReviewPage();
+        customerInforPage.openAddressPage(driver);
+        addressPage.openMyProductReviewPage(driver);
+        myProductReviewPage.openRewardPointPage(driver);
+        rewardPointPage.openAddressPage(driver);
+        addressPage.openRewardPointPage(driver);
+        rewardPointPage.openMyProductReviewPage(driver);
+        myProductReviewPage.openAddressPage(driver);
+        addressPage.openCustomerInforPage(driver);
+        customerInforPage.openMyProductReviewPage(driver);
+
+
 
 
     }
