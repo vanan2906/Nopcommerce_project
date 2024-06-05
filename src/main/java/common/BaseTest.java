@@ -36,7 +36,10 @@ public class BaseTest {
             default:
                 throw new RuntimeException("Browser name invalid");
         }
-        driver.get("https://demo.nopcommerce.com/");
+//        driver.get("https://demo.nopcommerce.com/");
+        driver.get("https://www.jqueryscript.net/demo/CRUD-Data-Grid-Plugin-jQuery-Quickgrid/");
+
+
         return driver;
 
     }

@@ -10,7 +10,7 @@
     <test name="Run on Firefox" preserve-order="true" >
         <parameter name="browser" value="firefox"/>
        <classes>
-           <class name="Switch_Page">
+           <class name="TableGrid">
            </class>
        </classes>
 </test>
