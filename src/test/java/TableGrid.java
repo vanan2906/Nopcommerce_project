@@ -66,6 +66,13 @@ public class TableGrid extends BaseTest {
 
 
     }
+    @Test
+    public void Table_03() {
+        tableGridPage.refreshToPage(driver);
+        tableGridPage.getValueEachRowAtAllPage();
+
+
+    }
 
     public int generateFakeNumber() {
 

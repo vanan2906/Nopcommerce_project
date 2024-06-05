@@ -278,6 +278,16 @@ public class BasePage {
         action.moveToElement(getWebElement(driver, xpathLocator)).perform();
 
     }
+    public void pressKeyToElement(WebDriver driver, String locatorType, Keys key) {
+        Actions action = new Actions(driver);
+        action.sendKeys(getWebElement(driver, locatorType), key).perform();
+
+    }
+    public void pressKeyToElement(WebDriver driver, String locatorType,  Keys key, String... dynamicValues) {
+        Actions action = new Actions(driver);
+        action.sendKeys(getWebElement(driver, getDynamicLocator(locatorType,dynamicValues)), key).perform();
+
+    }
 
     public void hightlightElement(WebDriver driver, String locator) {
         WebElement element = getWebElement(driver, locator);
