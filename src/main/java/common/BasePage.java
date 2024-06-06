@@ -455,4 +455,28 @@ public class BasePage {
         clickToElement(driver, BasePageUI.DYNAMIC_PAGE_FOOTER, pageName);
 
     }
+    public void clickToRadioButtonByID(WebDriver driver, String driverButtonID) {
+        waitForElementVisible(driver, BasePageUI.DYNAMIC_RADIO_BUTTON_BY_ID, driverButtonID);
+        clickToElement(driver, BasePageUI.DYNAMIC_RADIO_BUTTON_BY_ID, driverButtonID);
+
+    }
+    public void selectDropdownByName(WebDriver driver, String dropdpwnName, String itemText ){
+        selectDropdownByText(driver,BasePageUI.DYNAMIC_DROPDOWN_BY_NAME,itemText,dropdpwnName);
+    }
+
+    public void selectDropdownByText(WebDriver driver, String locator, String itemText) {
+        Select select = new Select(getElement(driver, locator));
+        select.selectByVisibleText(itemText);
+
+    }
+    public void selectDropdownByText(WebDriver driver, String locator, String itemText, String... params) {
+        locator =getDynamicLocator(locator, params);
+        Select select = new Select(getElement(driver, locator));
+        select.selectByVisibleText(itemText);
+
+    }
+
+    public WebElement getElement(WebDriver driver, String locator) {
+        return driver.findElement(By.xpath(locator));
+    }
 }

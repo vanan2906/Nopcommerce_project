@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class Pattern_Object extends BaseTest {
     WebDriver driver;
-    String firstName, lastName, validEmail, invalidEmail, notFoundEmail, password;
+    String firstName, lastName, validEmail, invalidEmail, notFoundEmail, password, day, month, year;
     BasePage basePage;
     HomePageObject homePage;
     RegisterPageObject registerPage;
@@ -40,13 +40,20 @@ public class Pattern_Object extends BaseTest {
         homePage = new HomePageObject(driver);
         registerPage = new RegisterPageObject(driver);
         loginPage = new LoginPageObject(driver);
+        day = "1";
+        month = "January";
+        year = "2000";
 
 
 //        Pre-condition
         homePage.openHeaderPageByName(driver, "Register");
+        registerPage.clickToRadioButtonByID(driver,"gender-male");
         registerPage.enterToTextboxByID(driver, "FirstName", firstName);
         registerPage.enterToTextboxByID(driver, "LastName", lastName);
         registerPage.enterToTextboxByID(driver, "Email", validEmail);
+        registerPage.selectDropdownByName(driver,"DateOfBirthDay",day);
+        registerPage.selectDropdownByName(driver,"DateOfBirthMonth",month);
+        registerPage.selectDropdownByName(driver,"DateOfBirthYear",year);
         registerPage.enterToTextboxByID(driver, "Password", password);
         registerPage.enterToTextboxByID(driver, "ConfirmPassword", password);
 
