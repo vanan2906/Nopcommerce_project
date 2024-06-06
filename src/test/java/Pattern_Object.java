@@ -2,11 +2,9 @@ import common.BasePage;
 import common.BaseTest;
 import org.testng.annotations.Parameters;
 import pageobject.HomePageObject;
-import  pageobject.LoginPageObject;
-import  pageobject.RegisterPageObject;
+import pageobject.LoginPageObject;
+import pageobject.RegisterPageObject;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -14,7 +12,8 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.Random;
-public class Login extends BaseTest {
+
+public class Pattern_Object extends BaseTest {
     WebDriver driver;
     String firstName, lastName, validEmail, invalidEmail, notFoundEmail, password;
     BasePage basePage;
@@ -22,10 +21,10 @@ public class Login extends BaseTest {
     RegisterPageObject registerPage;
     LoginPageObject loginPage;
 
-@Parameters("browser")
+    @Parameters("browser")
     @BeforeClass
     public void beforeClass(String browserName) {
-    driver= getDriverBrowser(browserName);
+        driver = getDriverBrowser(browserName);
         //driver = new ChromeDriver();
         //driver = new FirefoxDriver();
         driver.manage().window().maximize();
@@ -33,7 +32,7 @@ public class Login extends BaseTest {
         firstName = "Fc";
         lastName = "Xom Le";
         validEmail = "abc" + generateFakeNumber() + "@gmail.com";
-        invalidEmail= "invalid@gmail";
+        invalidEmail = "invalid@gmail";
         notFoundEmail = "notfound" + generateFakeNumber() + "@gmail.com";
         password = "1234567";
         basePage = new BasePage();
@@ -44,26 +43,26 @@ public class Login extends BaseTest {
 
 
 //        Pre-condition
-        homePage.clickToRegisterLink();
-        registerPage.inputToFirstnameTextbox(firstName);
-        registerPage.inputToLastnameTextbox(lastName);
-        registerPage.selectDateOfBirthday("1","January","1914");
+        homePage.openHeaderPageByName(driver, "Register");
+        registerPage.enterToTextboxByID(driver, "FirstName", firstName);
+        registerPage.enterToTextboxByID(driver, "LastName", lastName);
+        registerPage.enterToTextboxByID(driver, "Email", validEmail);
+        registerPage.enterToTextboxByID(driver, "Password", password);
+        registerPage.enterToTextboxByID(driver, "ConfirmPassword", password);
 
-        registerPage.inputToEmailTextbox(validEmail);
-        registerPage.inputToPasswordTextbox(password);
-        registerPage.inputToConfirmpasswordTextbox(password);
 
         registerPage.clickToRegisterButton();
-        homePage.clicktoLogOut();
-        
+        homePage.openHeaderPageByName(driver, "Log out");
+
 //        Logout -> CLick Loginin
 
 
     }
 
+
     @Test
     public void Login_01_Empty_Data() {
-        homePage.clickToLoginLink();
+        homePage.openHeaderPageByName(driver, "Log in");
         loginPage.clickToLoginButton();
         Assert.assertEquals(loginPage.getErrorMessageAtEmailMessage(), "Please enter your email");
 
@@ -72,6 +71,7 @@ public class Login extends BaseTest {
     @Test
     public void Login_02_Invalid_Email() {
         homePage.openHeaderPageByName(driver, "Log in");
+
         loginPage.enterToTextboxByID(driver, "Email", invalidEmail);
         loginPage.clickToLoginButton();
         Assert.assertEquals(loginPage.getErrorMessageAtEmailMessage(), "Wrong email");
@@ -82,9 +82,9 @@ public class Login extends BaseTest {
     @Test
     public void Login_03_Email_Not_Login_Yet() {
 
-        homePage.clickToLoginLink();
-        loginPage.inputToEmailTextbox(notFoundEmail);
-        loginPage.inputToPasswordTextbox(password);
+        homePage.openHeaderPageByName(driver, "Log in");
+        loginPage.enterToTextboxByID(driver, "Email", notFoundEmail);
+        loginPage.enterToTextboxByID(driver, "Password", password);
 
         loginPage.clickToLoginButton();
 
@@ -96,10 +96,10 @@ public class Login extends BaseTest {
 
     @Test
     public void Login_04_Existed_Email_But_Empty_Password() {
-        homePage.clickToLoginLink();
+        homePage.openHeaderPageByName(driver, "Log in");
 
-        loginPage.inputToEmailTextbox(validEmail);
 
+        loginPage.enterToTextboxByID(driver, "Email", validEmail);
         loginPage.clickToLoginButton();
 
         Assert.assertEquals(loginPage.getErrorMessageAtEmailTextbox(), "Login was unsuccessful. Please correct the errors and try again.\nThe credentials provided are incorrect");
@@ -108,23 +108,19 @@ public class Login extends BaseTest {
 
     @Test
     public void Login_05_Existed_Email_But_Wrong_Password() {
-        homePage.clickToRegisterLink();
-        registerPage.inputToFirstnameTextbox(firstName);
-        registerPage.inputToLastnameTextbox(lastName);
-        registerPage.inputToEmailTextbox(validEmail);
-        registerPage.inputToPasswordTextbox(password);
-        registerPage.inputToConfirmpasswordTextbox(password);
+        homePage.openHeaderPageByName(driver, "Register");
+        registerPage.enterToTextboxByID(driver, "FirstName", firstName);
+        registerPage.enterToTextboxByID(driver, "LastName", lastName);
+        registerPage.enterToTextboxByID(driver, "Email", validEmail);
+        registerPage.enterToTextboxByID(driver, "Password", password);
+        registerPage.enterToTextboxByID(driver, "ConfirmPassword", password);
 
         registerPage.clickToRegisterButton();
-        //Assert.assertEquals(registerPage.getRegisterSuccessMessage(), "Your registration completed");
-        //registerPage.clickToLogoutLink();
-        // //a[@class='ico-logout']
 
-        //registerPage.clickToLogoutLink();
-        homePage.clickToLoginLink();
+        homePage.openHeaderPageByName(driver, "Log in");
+        loginPage.enterToTextboxByID(driver, "Email", validEmail);
+        loginPage.enterToTextboxByID(driver, "Password", "AAAAAAAAAA");
 
-        loginPage.inputToEmailTextbox(validEmail);
-        loginPage.inputToPasswordTextbox("AAAAAAAAAA");
         loginPage.clickToLoginButton();
 
         Assert.assertEquals(loginPage.getErrorMessageAtEmailTextbox(), "Login was unsuccessful. Please correct the errors and try again.\nThe credentials provided are incorrect");
@@ -133,13 +129,15 @@ public class Login extends BaseTest {
 
     @Test
     public void Login_06_Success() {
-        homePage.clickToLoginLink();
-        loginPage.inputToEmailTextbox(validEmail);
-        loginPage.inputToPasswordTextbox(password);
+        homePage.openHeaderPageByName(driver, "Log in");
+        loginPage.enterToTextboxByID(driver, "Email", validEmail);
+        loginPage.enterToTextboxByID(driver, "Password", password);
+
+
         loginPage.clickToLoginButton();
 
         Assert.assertTrue(homePage.isMyAccountIsDisplayed());
-        ////div[@class='message-error validation-summary-errors']
+
 
 
     }

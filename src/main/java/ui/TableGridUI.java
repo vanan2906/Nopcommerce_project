@@ -7,5 +7,6 @@ public class TableGridUI {
     public static final String TOTAL_PAGINATION = "//ul[@class='qgrd-pagination-ul']/li[@class='qgrd-pagination-page']";
     public static final String PAGINATION_PAGE_BY_INDEX = "//ul[@class='qgrd-pagination-ul']/li[@class='qgrd-pagination-page'][%s]/a";
     public static final String ALL_ROW_EACH_PAGE = "//tbody/tr";
+    public static final String ALL_ROW_COUNTRY_EACH_PAGE = "//tbody/tr/td[@data-key='country']";
 
 }

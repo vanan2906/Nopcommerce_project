@@ -80,7 +80,7 @@ public class RegisterPageObject extends BasePage {
 
     ;
 
-    public void clickToLogoutLink() {
+    public void clickToLogoutLink(String pageName) {
         waitForElementClickable(driver, RegisterPageUI.LOGOUT_LINK);
         clickToElement(driver, RegisterPageUI.LOGOUT_LINK);
     }
@@ -120,8 +120,5 @@ public class RegisterPageObject extends BasePage {
     }
 
 
-    public void enterToTextboxByID(String textboxID, String value) {
-        waitForElementVisible(driver,RegisterPageUI.DYNAMIC_TEXTBOX_BY_ID, textboxID);
-        sendKeyToElement(driver,RegisterPageUI.DYNAMIC_TEXTBOX_BY_ID,value,textboxID);
-    }
+
 }

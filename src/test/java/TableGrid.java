@@ -13,12 +13,15 @@ import org.testng.annotations.Test;
 
 import javax.sound.midi.ShortMessage;
 import java.time.Duration;
+import java.util.List;
 import java.util.Random;
 
 public class TableGrid extends BaseTest {
     WebDriver driver;
     BasePage basePage;
     TableGridPageObject tableGridPage;
+    List<String> actualAllCountryValues;
+    List<String> expectedAllCountryValues;
 
 
     @Parameters("browser")
@@ -52,24 +55,24 @@ public class TableGrid extends BaseTest {
         Assert.assertTrue(tableGridPage.isPageNumberActive("12"));
 
 
-
-
     }
 
     @Test
     public void Table_02_Header_Textbox() {
         tableGridPage.refreshToPage(driver);
-        tableGridPage.enterToHeaderTextboxByLabel("Country","Malawi");
-        tableGridPage.enterToHeaderTextboxByLabel("Females","194740");
-        tableGridPage.enterToHeaderTextboxByLabel("Males","195140");
-        tableGridPage.enterToHeaderTextboxByLabel("Total","389880");
+        tableGridPage.enterToHeaderTextboxByLabel("Country", "Malawi");
+        tableGridPage.enterToHeaderTextboxByLabel("Females", "194740");
+        tableGridPage.enterToHeaderTextboxByLabel("Males", "195140");
+        tableGridPage.enterToHeaderTextboxByLabel("Total", "389880");
 
 
     }
+
     @Test
     public void Table_03() {
         tableGridPage.refreshToPage(driver);
         tableGridPage.getValueEachRowAtAllPage();
+        Assert.assertEquals(actualAllCountryValues, expectedAllCountryValues);
 
 
     }

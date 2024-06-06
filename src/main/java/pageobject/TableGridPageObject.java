@@ -40,7 +40,8 @@ public class TableGridPageObject  extends BasePage {
             clickToElement(driver, TableGridUI.PAGINATION_PAGE_BY_INDEX, String.valueOf(index));
             sleepInSecond(1);
 
-            List<WebElement> allRowElementEachPage = getListWebElement(driver, TableGridUI.ALL_ROW_EACH_PAGE);
+//            List<WebElement> allRowElementEachPage = getListWebElement(driver, TableGridUI.ALL_ROW_EACH_PAGE);
+            List<WebElement> allRowElementEachPage = getListWebElement(driver, TableGridUI.ALL_ROW_COUNTRY_EACH_PAGE);
             for (WebElement eachRow : allRowElementEachPage) {
                 allRowValueAllPage.add(eachRow.getText());
 
