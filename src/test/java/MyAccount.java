@@ -1,10 +1,7 @@
 import common.BasePage;
 import common.BaseTest;
 import org.testng.annotations.Parameters;
-import pageobject.CustomerInforPageObject;
-import pageobject.HomePageObject;
-import pageobject.LoginPageObject;
-import pageobject.RegisterPageObject;
+import pageobject.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -24,6 +21,7 @@ public class MyAccount extends BaseTest {
     RegisterPageObject registerPage;
     LoginPageObject loginPage;
     CustomerInforPageObject customerInforPage;
+    AddressPageObject addressPage;
 
     @Parameters("browser")
     @BeforeClass
@@ -41,10 +39,13 @@ public class MyAccount extends BaseTest {
         month = "June";
         year = "1998";
         basePage = new BasePage();
+        driver.get("https://demo.nopcommerce.com/");
+
         homePage = new HomePageObject(driver);
         registerPage = new RegisterPageObject(driver);
         loginPage = new LoginPageObject(driver);
         customerInforPage = new CustomerInforPageObject(driver);
+        addressPage = new AddressPageObject(driver);
 
 
         homePage.openHeaderPageByName(driver, "Register");
@@ -66,15 +67,19 @@ public class MyAccount extends BaseTest {
     public void MyAccount_01_Customer_Infor() {
         customerInforPage.clickToRadioButtonByID(driver,"gender-male");
         customerInforPage.enterToTextboxByID(driver,"FirstName","Hoa Hong");
-        customerInforPage.enterToTextboxByID(driver, "LastName", "24 ");
-        customerInforPage.selectDropdownByName(driver,"DateOfBirthDay","06");
+        customerInforPage.enterToTextboxByID(driver, "LastName", "Van Anh");
+        customerInforPage.selectDropdownByName(driver,"DateOfBirthDay","6");
         customerInforPage.selectDropdownByName(driver,"DateOfBirthMonth","May");
         customerInforPage.selectDropdownByName(driver,"DateOfBirthYear","1997");
-        customerInforPage.enterToTextboxByID(driver,"Email","ngocanh@gmail.com");
+        customerInforPage.enterToTextboxByID(driver,"Email",validEmail);
         customerInforPage.enterToTextboxByID(driver,"Company","SmartOSC");
         customerInforPage.clickToSaveButton(driver,"Save");
-        // Firstname, Lastname, Date of birth, Email , Company, -> Verify thong tin
-        Assert.assertEquals(customerInforPage.getMessageSuccessByText(driver);
+
+        Assert.assertEquals(customerInforPage.getMessageSuccessByText(driver),"The customer info has been updated successfully.");
+
+    }
+    public void Update_address() {
+        Assert.assertEquals(customerInforPage.getMessageSuccessByText(driver),"The customer info has been updated successfully.");
 
     }
 

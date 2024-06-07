@@ -7,6 +7,7 @@ import ui.RegisterPageUI;
 public class RegisterPageObject extends BasePage {
     WebDriver driver;
     public RegisterPageObject(WebDriver driver){
+
         this.driver = driver;
     }
 
