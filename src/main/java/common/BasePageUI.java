@@ -11,6 +11,8 @@ public class BasePageUI {
     public  static final String DYNAMIC_PAGE_FOOTER = "//div[@class='footer']//a[text()='%s']";
     public static final String DYNAMIC_RADIO_BUTTON_BY_ID = "//input[@id='%s']";
     public static final String DYNAMIC_DROPDOWN_BY_NAME = "//select[@name='%s']";
+    public static final String  DYNAMIC_BUTTON_BY_TEXT ="//button[text()='%s']";
+    public  static final String DYNAMIC_SUCCESS_MESSAGE = "//div[@class='bar-notification success']/p";
 
 
 

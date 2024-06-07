@@ -479,4 +479,15 @@ public class BasePage {
     public WebElement getElement(WebDriver driver, String locator) {
         return driver.findElement(By.xpath(locator));
     }
+
+    public void clickToSaveButton(WebDriver driver, String buttonText) {
+        waitForElementVisible(driver,BasePageUI.DYNAMIC_BUTTON_BY_TEXT,buttonText);
+        clickToElement(driver,BasePageUI.DYNAMIC_BUTTON_BY_TEXT,buttonText);
+    }
+
+    public String getMessageSuccessByText(WebDriver driver) {
+        waitForElementVisible(driver,BasePageUI.DYNAMIC_SUCCESS_MESSAGE);
+        return getElementText1(driver,BasePageUI.DYNAMIC_SUCCESS_MESSAGE);
+
+    }
 }

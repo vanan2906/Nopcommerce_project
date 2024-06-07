@@ -16,4 +16,6 @@ public class CustomerInforPageObject  extends BasePage {
 
 
     }
+
+
 }
