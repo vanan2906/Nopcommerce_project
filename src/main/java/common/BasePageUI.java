@@ -16,6 +16,8 @@ public class BasePageUI {
     public  static final String DYNAMIC_SUCCESS_MESSAGE = "//div[@class='bar-notification success']/p";
 //    public static final String DYNAMIC_PAGE_BY_CLASS = "//li[@class='%s']";
     public static final String DYNAMIN_GET_INFO_BY_CLASS = "//ul[@class='info']//li[@class='%s']";
+    public static final String CLOSE_BUTTON = "//span[@title='Close']";
+    public static final String LOGIN_ERROR_MESSAGE ="//div[@class='message-error validation-summary-errors']";
 
 
 

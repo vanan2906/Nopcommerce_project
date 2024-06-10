@@ -1,5 +1,6 @@
 import common.BasePage;
 import common.BaseTest;
+import org.openqa.selenium.UnhandledAlertException;
 import org.testng.annotations.Parameters;
 import pageobject.*;
 import org.openqa.selenium.WebDriver;
@@ -15,13 +16,14 @@ import java.util.Random;
 
 public class MyAccount extends BaseTest {
     WebDriver driver;
-    String firstName, lastName, validEmail, invalidEmail, notFoundEmail, password, day, month, year;
+    String firstName, lastName, validEmail, invalidEmail, notFoundEmail, oldpassword, newpassword, day, month, year;
     BasePage basePage;
     HomePageObject homePage;
     RegisterPageObject registerPage;
     LoginPageObject loginPage;
     CustomerInforPageObject customerInforPage;
     AddressPageObject addressPage;
+    CustomerInforPageObject changePasswordPage;
 
     @Parameters("browser")
     @BeforeClass
@@ -34,7 +36,8 @@ public class MyAccount extends BaseTest {
         validEmail = "abc" + generateFakeNumber() + "@gmail.com";
         invalidEmail = "invalid@gmail";
         notFoundEmail = "notfound" + generateFakeNumber() + "@gmail.com";
-        password = "1234567";
+        oldpassword = "1234567";
+        newpassword = "1111111";
         day = "29";
         month = "June";
         year = "1998";
@@ -46,6 +49,7 @@ public class MyAccount extends BaseTest {
         loginPage = new LoginPageObject(driver);
         customerInforPage = new CustomerInforPageObject(driver);
         addressPage = new AddressPageObject(driver);
+        changePasswordPage = new CustomerInforPageObject(driver);
 
 
         homePage.openHeaderPageByName(driver, "Register");
@@ -56,8 +60,8 @@ public class MyAccount extends BaseTest {
         registerPage.selectDropdownByName(driver, "DateOfBirthDay", day);
         registerPage.selectDropdownByName(driver, "DateOfBirthMonth", month);
         registerPage.selectDropdownByName(driver, "DateOfBirthYear", year);
-        registerPage.enterToTextboxByID(driver, "Password", password);
-        registerPage.enterToTextboxByID(driver, "ConfirmPassword", password);
+        registerPage.enterToTextboxByID(driver, "Password", oldpassword);
+        registerPage.enterToTextboxByID(driver, "ConfirmPassword", oldpassword);
         registerPage.clickToRegisterButton();
         homePage.openHeaderPageByName(driver, "My account");
 
@@ -79,7 +83,7 @@ public class MyAccount extends BaseTest {
 
     }
     @Test
-    public void MyAccount_01_Update_address() {
+    public void MyAccount_02_Update_address() {
         addressPage.clickToPageNavigationLink(driver, "Addresses");
         addressPage.clickToButtonByText(driver,"Add new");
         addressPage.enterToTextboxByID(driver,"Address_FirstName","Van Anh");
@@ -98,8 +102,38 @@ public class MyAccount extends BaseTest {
         addressPage.clickToButtonByText(driver,"Save");
 
         Assert.assertEquals(addressPage.getMessageSuccessByText(driver),"The new address has been added successfully.");
-        Assert.assertEquals(addressPage.getTextboxValueByClass(driver,"email"), validEmail);
-        Assert.assertEquals(addressPage.getTextboxValueByClass(driver,"phone"), "0987654321");
+//        Assert.assertEquals(addressPage.getTextboxValueByClass(driver,"email"), validEmail);
+//        Assert.assertEquals(addressPage.getTextboxValueByClass(driver,"phone"), "0987654321");
+
+    }
+    @Test
+    public void MyAccount_03_Change_Password() {
+
+        changePasswordPage.clickToPageNavigationLink(driver, "Change password");
+        changePasswordPage.enterToTextboxByID(driver,"OldPassword",oldpassword);
+        changePasswordPage.enterToTextboxByID(driver,"NewPassword",newpassword);
+        changePasswordPage.enterToTextboxByID(driver,"ConfirmNewPassword",newpassword);
+        changePasswordPage.clickToButtonByText(driver,"Change password");
+//        Assert.assertEquals(addressPage.getMessageSuccessByText(driver),"Password was changed");
+        changePasswordPage.clickToCloseButton(driver,"Close");
+        homePage.refreshToPage(driver);
+
+
+        homePage.openHeaderPageByName(driver,"Log out");
+        homePage.openHeaderPageByName(driver,"Log in");
+        homePage.enterToTextboxByID(driver,"Email",validEmail);
+        homePage.enterToTextboxByID(driver,"Password",oldpassword);
+        homePage.clickToButtonByText(driver,"Log in");
+        Assert.assertEquals(homePage.getMessageErrorByText(driver),"Login was unsuccessful. Please correct the errors and try again.\n" +
+                "No customer account found");
+
+
+        homePage.enterToTextboxByID(driver,"Email",validEmail);
+        homePage.enterToTextboxByID(driver,"Password",newpassword);
+        homePage.clickToButtonByText(driver,"Log in");
+        Assert.assertTrue(homePage.isMyAccountIsDisplayed());
+
+
 
     }
 

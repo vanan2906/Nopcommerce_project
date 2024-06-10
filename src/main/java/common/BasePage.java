@@ -1,8 +1,6 @@
 package common;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,8 +10,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 import java.util.Set;
-
-import static org.openqa.selenium.remote.Browser.FIREFOX;
 
 public class BasePage {
     public void openPageUrl(WebDriver driver, String pageUrl) {
@@ -499,5 +495,16 @@ public class BasePage {
     public String getTextboxValueByClass(WebDriver driver, String textClass) {
         waitForElementVisible(driver,BasePageUI.DYNAMIN_GET_INFO_BY_CLASS.trim(),textClass);
         return getElementText1(driver,BasePageUI.DYNAMIN_GET_INFO_BY_CLASS.trim(),textClass);
+    }
+
+    public void clickToCloseButton(WebDriver driver, String textClose) {
+        waitForElementVisible(driver,BasePageUI.CLOSE_BUTTON);
+        clickToElement(driver,BasePageUI.CLOSE_BUTTON);
+    }
+
+    public String getMessageErrorByText(WebDriver driver) {
+        waitForElementVisible(driver,BasePageUI.LOGIN_ERROR_MESSAGE);
+        return getElementText1(driver,BasePageUI.LOGIN_ERROR_MESSAGE);
+
     }
 }
