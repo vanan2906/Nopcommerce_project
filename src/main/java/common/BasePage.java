@@ -480,7 +480,7 @@ public class BasePage {
         return driver.findElement(By.xpath(locator));
     }
 
-    public void clickToSaveButton(WebDriver driver, String buttonText) {
+    public void clickToButtonByText(WebDriver driver, String buttonText) {
         waitForElementVisible(driver,BasePageUI.DYNAMIC_BUTTON_BY_TEXT,buttonText);
         clickToElement(driver,BasePageUI.DYNAMIC_BUTTON_BY_TEXT,buttonText);
     }
@@ -489,5 +489,15 @@ public class BasePage {
         waitForElementVisible(driver,BasePageUI.DYNAMIC_SUCCESS_MESSAGE);
         return getElementText1(driver,BasePageUI.DYNAMIC_SUCCESS_MESSAGE);
 
+    }
+
+    public void clickToPageNavigationLink(WebDriver driver, String text) {
+        waitForElementVisible(driver,BasePageUI.DYNAMIC_PAGE_LINK_BY_TEXT,text);
+        clickToElement(driver,BasePageUI.DYNAMIC_PAGE_LINK_BY_TEXT,text);
+    }
+
+    public String getTextboxValueByClass(WebDriver driver, String textClass) {
+        waitForElementVisible(driver,BasePageUI.DYNAMIN_GET_INFO_BY_CLASS.trim(),textClass);
+        return getElementText1(driver,BasePageUI.DYNAMIN_GET_INFO_BY_CLASS.trim(),textClass);
     }
 }

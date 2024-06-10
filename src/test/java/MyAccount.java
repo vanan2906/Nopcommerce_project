@@ -73,13 +73,33 @@ public class MyAccount extends BaseTest {
         customerInforPage.selectDropdownByName(driver,"DateOfBirthYear","1997");
         customerInforPage.enterToTextboxByID(driver,"Email",validEmail);
         customerInforPage.enterToTextboxByID(driver,"Company","SmartOSC");
-        customerInforPage.clickToSaveButton(driver,"Save");
+        customerInforPage.clickToButtonByText(driver,"Save");
 
         Assert.assertEquals(customerInforPage.getMessageSuccessByText(driver),"The customer info has been updated successfully.");
 
     }
-    public void Update_address() {
-        Assert.assertEquals(customerInforPage.getMessageSuccessByText(driver),"The customer info has been updated successfully.");
+    @Test
+    public void MyAccount_01_Update_address() {
+        addressPage.clickToPageNavigationLink(driver, "Addresses");
+        addressPage.clickToButtonByText(driver,"Add new");
+        addressPage.enterToTextboxByID(driver,"Address_FirstName","Van Anh");
+        addressPage.enterToTextboxByID(driver,"Address_LastName", "nguyen Thi");
+        addressPage.enterToTextboxByID(driver,"Address_Email",validEmail);
+        addressPage.enterToTextboxByID(driver,"Address_Company","ABC company");
+        addressPage.selectDropdownByName(driver,"Address.CountryId","United States");
+        addressPage.selectDropdownByName(driver,"Address.StateProvinceId","Arkansas");
+
+        addressPage.enterToTextboxByID(driver,"Address_City","Ha Noi");
+        addressPage.enterToTextboxByID(driver,"Address_Address1","123 Le Van Luong");
+        addressPage.enterToTextboxByID(driver,"Address_Address2","456 Le Van Luong");
+        addressPage.enterToTextboxByID(driver,"Address_ZipPostalCode","100000");
+        addressPage.enterToTextboxByID(driver,"Address_PhoneNumber","0987654321");
+        addressPage.enterToTextboxByID(driver,"Address_FaxNumber","123456789");
+        addressPage.clickToButtonByText(driver,"Save");
+
+        Assert.assertEquals(addressPage.getMessageSuccessByText(driver),"The new address has been added successfully.");
+        Assert.assertEquals(addressPage.getTextboxValueByClass(driver,"email"), validEmail);
+        Assert.assertEquals(addressPage.getTextboxValueByClass(driver,"phone"), "0987654321");
 
     }
 
