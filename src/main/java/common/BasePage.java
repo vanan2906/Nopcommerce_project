@@ -507,4 +507,11 @@ public class BasePage {
         return getElementText1(driver,BasePageUI.LOGIN_ERROR_MESSAGE);
 
     }
+
+    public void openHeaderPageByNameByAlert(WebDriver driver, String textAlert) {
+        acceptAlert(driver);
+        waitForElementVisible(driver,BasePageUI.DYNAMIC_PAGE_HEADER,textAlert);
+        clickToElement(driver,BasePageUI.DYNAMIC_PAGE_HEADER,textAlert);
+        acceptAlert(driver);
+    }
 }

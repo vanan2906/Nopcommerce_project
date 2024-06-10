@@ -115,12 +115,12 @@ public class MyAccount extends BaseTest {
         changePasswordPage.enterToTextboxByID(driver,"ConfirmNewPassword",newpassword);
         changePasswordPage.clickToButtonByText(driver,"Change password");
 //        Assert.assertEquals(addressPage.getMessageSuccessByText(driver),"Password was changed");
-        changePasswordPage.clickToCloseButton(driver,"Close");
+//        changePasswordPage.clickToCloseButton(driver,"Close");
         homePage.refreshToPage(driver);
 
-
-        homePage.openHeaderPageByName(driver,"Log out");
-        homePage.openHeaderPageByName(driver,"Log in");
+// Cần aleart
+        homePage.openHeaderPageByNameByAlert(driver,"Log out");
+        homePage.openHeaderPageByNameByAlert(driver,"Log in");
         homePage.enterToTextboxByID(driver,"Email",validEmail);
         homePage.enterToTextboxByID(driver,"Password",oldpassword);
         homePage.clickToButtonByText(driver,"Log in");
@@ -132,8 +132,6 @@ public class MyAccount extends BaseTest {
         homePage.enterToTextboxByID(driver,"Password",newpassword);
         homePage.clickToButtonByText(driver,"Log in");
         Assert.assertTrue(homePage.isMyAccountIsDisplayed());
-
-
 
     }
 
