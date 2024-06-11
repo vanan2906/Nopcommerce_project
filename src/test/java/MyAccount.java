@@ -1,5 +1,6 @@
 import common.BasePage;
 import common.BaseTest;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.UnhandledAlertException;
 import org.testng.annotations.Parameters;
 import pageobject.*;
@@ -114,13 +115,17 @@ public class MyAccount extends BaseTest {
         changePasswordPage.enterToTextboxByID(driver,"NewPassword",newpassword);
         changePasswordPage.enterToTextboxByID(driver,"ConfirmNewPassword",newpassword);
         changePasswordPage.clickToButtonByText(driver,"Change password");
-//        Assert.assertEquals(addressPage.getMessageSuccessByText(driver),"Password was changed");
-//        changePasswordPage.clickToCloseButton(driver,"Close");
-        homePage.refreshToPage(driver);
+ Assert.assertEquals(addressPage.getMessageSuccessByText(driver),"Password was changed");
+changePasswordPage.clickToCloseButton(driver,"Close");
+        try {
+            Alert alert = driver.switchTo().alert();
+            alert.accept();
+        } catch (Exception e) {
+            System.out.println("No alert present: " + e.getMessage());
+        }
 
-// Cần aleart
-        homePage.openHeaderPageByNameByAlert(driver,"Log out");
-        homePage.openHeaderPageByNameByAlert(driver,"Log in");
+        homePage.openHeaderPageByName(driver,"Log out");
+        homePage.openHeaderPageByName(driver,"Log in");
         homePage.enterToTextboxByID(driver,"Email",validEmail);
         homePage.enterToTextboxByID(driver,"Password",oldpassword);
         homePage.clickToButtonByText(driver,"Log in");
